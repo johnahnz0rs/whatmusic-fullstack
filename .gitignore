@@ -28,3 +28,4 @@ yarn-error.log*
 .env
 /venv
 /.idea
+/client/src/components/ZZNothing.js

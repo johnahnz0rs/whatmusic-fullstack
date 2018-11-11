@@ -29,7 +29,7 @@ module.exports = {
         );
     },
 
-    // @ROUTE /callback/spotify
+    // @ROUTE /callback-spotify
     // @DESC spotify's callback url
     callbackSpotify: function(req, res) {
         console.log('*** controller.callbackSpotify() ***', req.body);
@@ -52,7 +52,7 @@ module.exports = {
         };
         request.post(authOptions, function(error, response, body) {
             let access_token = body.access_token;
-            let uri = process.env.FRONTEND_URI + '/user';
+            let uri = process.env.FRONTEND_URI + '/profile';
             res.redirect(uri + '?access_token=' + access_token);
         });
     },

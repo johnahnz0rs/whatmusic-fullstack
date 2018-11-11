@@ -6,6 +6,9 @@ class Login extends React.Component {
         super(props);
         this.state = {
             // props
+            user: {
+                // id: '1234'
+            },
             splashHashtags: {
                 display: 'inline',
                 listStyle: 'none',
@@ -13,14 +16,29 @@ class Login extends React.Component {
             },
         };
         // declare methods here
-
+        this.signInWithSpotify = this.signInWithSpotify.bind(this);
     }
 
     componentDidMount() {
-        this.props.user.id ? this.props.pickPage('profile') : this.props.pickPage('login');
+        this.setState({user: this.props.user});
+        if (this.state.user) {
+            // this.props.user.id ? this.props.pickPage('profile') : this.props.pickPage('login');
+            if (this.state.user.id) {
+                window.location = '/profile';
+            }
+        }
     }
 
+    signInWithSpotify = () => {
+        fetch('/api/login-spotify')
+            .then(res => res.json())
+            .then(() => this.props.pickPage('profile'));
+    };
+
     render() {
+
+        const spotifyLoginURL = 'http://localhost:5000/api/login-spotify';
+
         return(
             <React.Fragment>
                 <div className="container-fluid login-comp-background">
@@ -55,7 +73,11 @@ class Login extends React.Component {
                     </div>
 
                     <div className="row justify-content-center">
-
+                        <div className="col-4">
+                            {/*<button className="btn btn-sm btn-primary" onClick={this.signInWithSpotify}>Sign in with Spotify</button>*/}
+                            {/*<button className="btn btn-sm btn-primary" onClick={() => window.location=`api/login`}>Sign in with Spotify</button>*/}
+                            <a href={spotifyLoginURL}><button className="btn btn-sm btn-primary">Sign in with Spotify</button></a>
+                        </div>
                     </div>
 
                 </div>

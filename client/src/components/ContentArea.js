@@ -1,9 +1,9 @@
 import React from 'react';
-// import { Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 // import User from './User';
 import Profile from './Profile';
 import Login from './Login';
-import Navbar from './Navbar';
+import MyNavbar from './MyNavbar';
 import Compare from './Compare';
 
 import BackgroundImage from '../assets/background.png';
@@ -51,22 +51,22 @@ class ContentArea extends React.Component {
         return (
             <React.Fragment>
                 <div className="root-div container-fluid">
-                    <div className="navbar-container" style={navbarContainer}>
-                        <Navbar user={this.state.user} signOut={this.signOut} pickPage={this.pickPage} />
-                    </div>
+                    {/*<div className="navbar-container" style={navbarContainer}>*/}
+                        <MyNavbar user={this.state.user} signOut={this.signOut} pickPage={this.pickPage} />
+                    {/*</div>*/}
 
-                    {/*<Route exact path="/" component={Login} />*/}
+                    <Route exact path="/" component={Login} />
                     {/*<Route path="/user" component={User} />*/}
-                    {/*<Route path="/profile" render={() => <Profile user={this.state.user} pickPage={this.pickPage} />} />*/}
+                    <Route path="/profile" render={() => <Profile user={this.state.user} pickPage={this.pickPage} />} />
                     {/*<Route path="/compare" render={() => <Compare user={this.state.user} /> } />*/}
 
                     {/*display pages*/}
-                    {this.state.showThisPage === 'login' &&
-                        <Login user={this.state.user} pickPage={this.pickPage} />}
-                    {this.state.showThisPage === 'profile' &&
-                        <Profile user={this.state.user} pickPage={this.pickPage} />}
-                    {this.state.showThisPage === 'compare' &&
-                        <Compare user={this.state.user} pickPage/>}
+                    {/*{this.state.showThisPage === 'login' &&*/}
+                        {/*<Login user={this.state.user} pickPage={this.pickPage} />}*/}
+                    {/*{this.state.showThisPage === 'profile' &&*/}
+                        {/*<Profile user={this.state.user} pickPage={this.pickPage} />}*/}
+                    {/*{this.state.showThisPage === 'compare' &&*/}
+                        {/*<Compare user={this.state.user} pickPage/>}*/}
 
 
                 </div>
