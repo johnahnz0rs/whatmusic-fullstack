@@ -6,18 +6,26 @@ class Profile extends React.Component {
         super(props);
         this.state = {
             // stuffs
+            user: this.props.user
         };
         // declare functions here
         this.getTopGenres = this.getTopGenres.bind(this);
-        this.dynamicSort = this.dynamicSort.bind(this);
+    }
+
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.user !== this.props.user) {
+            console.log('*** componentDidUpdate ***');
+            this.setState({user: this.props.user});
+        }
     }
 
     componentDidMount() {
-        // Users Profile /v1/me
-            // Top Artists /v1/me/top/artists
-            // getTopGenres(topArtists)
-                // Top Tracks /v1/me/top/tracks
-
+        // this.fetch;
+        console.log('*** this.state.user ***', this.state.user);
+        // if (!this.state.user.id) {
+        //     window.location('/');
+        // }
 
         // const's
         const searchParams = new URLSearchParams(window.location.search);
@@ -30,7 +38,13 @@ class Profile extends React.Component {
 
         let user = {};
 
+
         // SPOTIFY
+        // Users Profile /v1/me
+            // Top Artists /v1/me/top/artists
+            // getTopGenres(topArtists)
+                // Top Tracks /v1/me/top/tracks
+
         // get Users Profile
         // @RETURNS { id, display_name, email, external_urls.spotify, followers.total, images[0].url, country, product: 'membership type', type: 'model(?) type', href: 'api endpoint for this user', uri }
         fetch(`${spotifyAPI}/me`, getConfig)
@@ -123,6 +137,10 @@ class Profile extends React.Component {
                                 user.topTracks = userTopTracks;
                                 console.log('*** user after api calls ***', user);
                             })
+                            .then(() => {
+                                // pass up to parent/ContentArea
+                                this.props.updateStateUser(user);
+                            })
                             .catch(err => console.log(err));
                     })
                     .catch(err => console.log(err));
@@ -166,24 +184,13 @@ class Profile extends React.Component {
         return genres.sort((a,b) => b.count - a.count);
     };
 
-    dynamicSort = (property) => {
-        let sortOrder = 1;
-        if(property[0] === "-") {
-            sortOrder = -1;
-            property = property.substr(1);
-        }
-        return function (a,b) {
-            const result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-            return result * sortOrder;
-        }
-    };
-
 
     render() {
         return(
           <React.Fragment>
               <div className="">
                   <p>lol this is ur profile d00d</p>
+                  <button onClick={() => console.log('*** Profile.state***', this.state)}>print Profile.state</button>
 
 
               </div>

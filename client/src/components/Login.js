@@ -5,27 +5,22 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            // props
-            user: {
-                // id: '1234'
-            },
-            splashHashtags: {
-                display: 'inline',
-                listStyle: 'none',
-                marginTop: 20
-            },
+            user: this.props.user
         };
         // declare methods here
         this.signInWithSpotify = this.signInWithSpotify.bind(this);
     }
 
     componentDidMount() {
-        this.setState({user: this.props.user});
-        if (this.state.user) {
-            // this.props.user.id ? this.props.pickPage('profile') : this.props.pickPage('login');
-            if (this.state.user.id) {
-                window.location = '/profile';
-            }
+
+    }
+
+
+
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.user !== this.props.user) {
+            this.setState({user: this.props.user});
         }
     }
 
@@ -43,6 +38,7 @@ class Login extends React.Component {
             <React.Fragment>
                 <div className="container-fluid login-comp-background">
                     <p>lol this is login</p>
+                    <button className="btn btn-sm btn-outline-primary" onClick={() => console.log('*** print Login.state ***', this.state)}>print Login.state</button>
 
                     <div className="row justify-content-center">
                         <div className="col-3">

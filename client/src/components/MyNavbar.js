@@ -13,14 +13,22 @@ class MyNavbar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: {}
+            user: this.props.user
         };
         // bind methods here
         this.pickPage = this.pickPage.bind(this);
     }
 
     componentDidMount() {
-        this.setState({user: this.props.user});
+        // this.setState({user: this.props.user});
+        // this.fetch;
+    }
+
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.user !== this.props.user) {
+            this.setState({user: this.props.user});
+        }
     }
 
     pickPage = (e) => {
@@ -31,7 +39,7 @@ class MyNavbar extends React.Component {
 
     render() {
 
-        const divNavbar = {width: '100%', backgroundColor: 'green', margin: '0 auto', padding: '0'};
+        // const divNavbar = {width: '100%', backgroundColor: 'green', margin: '0 auto', padding: '0'};
 
         return (
             <React.Fragment>
@@ -68,23 +76,24 @@ class MyNavbar extends React.Component {
 
                     <NavbarBrand href='/' className="mr-auto ml-auto">
                         <img className="navbar-brand" src={Brand} alt="" />
+                        {/*<NavLink href="/">whatMusic</NavLink>*/}
                     </NavbarBrand>
 
                     <Nav className="mr-auto" navbar>
                         <NavItem>
-                            <NavLink href="/z0rs-org/portfolio">Portfolio</NavLink>
+                            <NavLink href="/profile">Profile</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="/z0rs-org/resume">Resume</NavLink>
+                            <NavLink href="/compare">Compare</NavLink>
                         </NavItem>
+                        {this.state.user.id &&
                         <NavItem>
-                            <NavLink href="/z0rs-org/about">About J.Ahn</NavLink>
+                            <NavLink href="#" onClick={() => this.props.signOut}>Sign Out</NavLink>
                         </NavItem>
-                        <NavItem>
-                            <NavLink href="/z0rs-org/contact">Contact</NavLink>
-                        </NavItem>
+                        }
                     </Nav>
                 </Navbar>
+                <button className="btn btn-sm btn-outline-warning" onClick={() => console.log('*** print MyNavbar.state ***', this.state)}>print MyNavbar.state</button>
 
             </React.Fragment>
         );
