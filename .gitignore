@@ -29,3 +29,5 @@ yarn-error.log*
 /venv
 /.idea
 /client/src/components/ZZNothing.js
+whatmusic_v1_users.csv
+whatmusic_v1_users.json

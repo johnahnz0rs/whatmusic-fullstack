@@ -189,7 +189,7 @@ class Profile extends React.Component {
         return(
           <React.Fragment>
               <div className="">
-                  <p>lol this is ur profile d00d</p>
+                  <p>this is ur profile. display data-vis of ur music here</p>
                   <button onClick={() => console.log('*** Profile.state***', this.state)}>print Profile.state</button>
 
 

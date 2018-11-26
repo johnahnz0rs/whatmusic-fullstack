@@ -52,7 +52,7 @@ module.exports = {
         };
         request.post(authOptions, function(error, response, body) {
             let access_token = body.access_token;
-            let uri = process.env.FRONTEND_URI + '/profile';
+            let uri = process.env.FRONTEND_URI + '/user';
             res.redirect(uri + '?access_token=' + access_token);
         });
     },
